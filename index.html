@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>من سيربح المليون</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --bg:#020817;
+    --blue:#071b4d;
+    --blue2:#0b2b6d;
+    --gold:#ffd83d;
+    --gold2:#ffae00;
+    --white:#fff;
+    --muted:#aebbd7;
+    --green:#21df83;
+    --red:#ff5264;
+}
+
+body{
+    min-height:100vh;
+    font-family:Tahoma,Arial,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 50% -10%,#123b91 0%,#06183f 35%,#020817 75%);
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+        radial-gradient(circle,#ffffff66 1px,transparent 1px),
+        radial-gradient(circle,#ffd83d55 1px,transparent 1px);
+    background-size:90px 90px,130px 130px;
+    background-position:10px 20px,40px 70px;
+    animation:stars 12s linear infinite;
+    opacity:.35;
+}
+
+@keyframes stars{
+    from{transform:translateY(0)}
+    to{transform:translateY(-90px)}
+}
+
+button,input{
+    font-family:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:1250px;
+    margin:auto;
+    padding:12px;
+    position:relative;
+    z-index:2;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.logo-icon{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    background:linear-gradient(145deg,#173d91,#061a48);
+    border:2px solid #d3a91e;
+    box-shadow:0 0 20px #d3a91e33;
+}
+
+.logo-text{
+    font-size:18px;
+    font-weight:900;
+}
+
+.logo-text small{
+    display:block;
+    color:#9daccc;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.score-box{
+    min-width:125px;
+    padding:9px 14px;
+    border:1px solid #d6b72e;
+    border-radius:18px;
+    background:linear-gradient(145deg,#0e2b68,#061633);
+    text-align:center;
+    box-shadow:0 0 20px #d6b72e22;
+}
+
+.score-box span{
+    display:block;
+    color:#9eafd2;
+    font-size:11px;
+}
+
+.score-box strong{
+    display:block;
+    color:#ffe34d;
+    font-size:19px;
+    margin-top:2px;
+}
+
+/* ================= SCREENS ================= */
+
+.screen{
+    display:none;
+    animation:fadeIn .35s ease;
+}
+
+.screen.active{
+    display:block;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ================= START ================= */
+
+.start-card{
+    margin-top:25px;
+    text-align:center;
+    padding:35px 20px;
+    border:1px solid #d2af29;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 50% 0%,#123b87,#06173c 65%);
+    box-shadow:0 0 45px #001a52;
+}
+
+.crown{
+    font-size:62px;
+    animation:crownFloat 2s ease-in-out infinite;
+}
+
+@keyframes crownFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-9px)}
+}
+
+.start-card h1{
+    color:#ffe34c;
+    font-size:30px;
+    margin:12px 0;
+}
+
+.start-card p{
+    color:#b7c3df;
+    line-height:1.8;
+}
+
+.info-row{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:20px 0;
+}
+
+.info-pill{
+    background:#09245a;
+    border:1px solid #31528e;
+    padding:8px 13px;
+    border-radius:50px;
+    color:#dce6ff;
+    font-size:12px;
+}
+
+.main-btn{
+    width:100%;
+    max-width:420px;
+    padding:17px;
+    border-radius:50px;
+    color:#111;
+    font-size:20px;
+    font-weight:900;
+    background:linear-gradient(180deg,#ffe957,#ffad00);
+    box-shadow:0 7px 0 #a96700,0 0 25px #ffc40044;
+    transition:.15s;
+}
+
+.main-btn:active{
+    transform:translateY(5px);
+    box-shadow:0 2px 0 #a96700;
+}
+
+.best-score{
+    margin-top:20px;
+    color:#a9b8d8;
+    font-size:13px;
+}
+
+/* ================= TRANSFER TOP ================= */
+
+.transfer-card{
+    margin:10px 0 15px;
+    padding:17px;
+    border-radius:24px;
+    border:1px solid #d2b12c;
+    background:
+        linear-gradient(145deg,#0b2c6d,#061536);
+    box-shadow:0 0 28px #d2b12c19;
+    position:relative;
+    overflow:hidden;
+}
+
+.transfer-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:#ffd83d18;
+    border-radius:50%;
+    left:-50px;
+    top:-60px;
+}
+
+.transfer-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.transfer-icon{
+    width:55px;
+    height:55px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:31px;
+    background:#102f6e;
+    border:1px solid #d2b12c;
+}
+
+.transfer-info{
+    flex:1;
+}
+
+.transfer-info h3{
+    color:#ffdd35;
+    font-size:20px;
+    margin-bottom:4px;
+}
+
+.transfer-info p{
+    color:#aebbd7;
+    font-size:12px;
+}
+
+.transfer-balance{
+    margin:13px 0;
+    padding:10px 13px;
+    border-radius:14px;
+    background:#03122e;
+    border:1px solid #29477d;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.transfer-balance span{
+    color:#aab8d4;
+    font-size:12px;
+}
+
+.transfer-balance strong{
+    color:#ffe23e;
+    font-size:18px;
+}
+
+.transfer-btn{
+    width:100%;
+    padding:14px;
+    border-radius:18px;
+    background:linear-gradient(180deg,#ffe74f,#ffa900);
+    color:#111;
+    font-size:17px;
+    font-weight:900;
+    box-shadow:0 5px 0 #9b6500;
+    transition:.15s;
+}
+
+.transfer-btn:active{
+    transform:translateY(4px);
+    box-shadow:0 1px 0 #9b6500;
+}
+
+/* ================= GAME TOP ================= */
+
+.game-top{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:8px;
+    margin-bottom:12px;
+}
+
+.level-box{
+    padding:10px;
+    border-radius:15px;
+    background:#071b40;
+    border:1px solid #29467e;
+}
+
+.level-box span{
+    display:block;
+    color:#899bc0;
+    font-size:10px;
+}
+
+.level-box strong{
+    color:#fff;
+    font-size:15px;
+}
+
+.timer{
+    width:66px;
+    height:66px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle,#081d47 57%,transparent 58%),
+        conic-gradient(#ffd52e var(--progress),#253b64 0);
+    box-shadow:0 0 25px #ffd52e2b;
+    border:2px solid #c7a72b;
+    font-size:20px;
+    font-weight:900;
+    color:#ffe44a;
+}
+
+.timer.warning{
+    color:#ff5666;
+    border-color:#ff5666;
+    animation:pulse .6s infinite alternate;
+}
+
+@keyframes pulse{
+    to{transform:scale(1.07);box-shadow:0 0 30px #ff405544}
+}
+
+.progress-box{
+    text-align:left;
+}
+
+.progress-box span{
+    display:block;
+    color:#8799bb;
+    font-size:10px;
+}
+
+.progress-bar{
+    height:7px;
+    background:#172d57;
+    border-radius:20px;
+    margin-top:5px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#ffd62f,#ff9f00);
+    transition:.5s;
+}
+
+/* ================= QUESTION ================= */
+
+.question-card{
+    min-height:145px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px 17px;
+    border-radius:25px;
+    border:2px solid #c7a329;
+    background:
+        radial-gradient(circle at 50% 0%,#123a88,#061633 70%);
+    box-shadow:inset 0 0 30px #001438;
+    margin-bottom:16px;
+}
+
+.question{
+    font-size:23px;
+    line-height:1.65;
+    font-weight:900;
+}
+
+/* ================= LIFELINES ================= */
+
+.lifelines{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:14px 0;
+}
+
+.life{
+    width:78px;
+    height:62px;
+    border-radius:50%;
+    border:2px solid #b99b29;
+    background:linear-gradient(145deg,#123673,#061837);
+    color:#fff;
+    font-size:25px;
+    transition:.2s;
+}
+
+.life small{
+    display:block;
+    font-size:9px;
+    color:#aebcda;
+    margin-top:2px;
+}
+
+.life:active{
+    transform:scale(.9);
+}
+
+.life.used{
+    opacity:.25;
+    filter:grayscale(1);
+    pointer-events:none;
+}
+
+/* ================= ANSWERS ================= */
+
+.answers{
+    display:grid;
+    gap:12px;
+}
+
+.answer{
+    min-height:65px;
+    border-radius:34px;
+    border:2px solid #6479a7;
+    background:
+        linear-gradient(100deg,#0c2c6d,#081d4a);
+    color:#fff;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-align:right;
+    transition:.18s;
+    box-shadow:0 5px 15px #0003;
+}
+
+.answer:active{
+    transform:scale(.98);
+}
+
+.answer:hover{
+    border-color:#ffe047;
+    transform:translateY(-2px);
+}
+
+.answer-letter{
+    width:42px;
+    height:42px;
+    flex-shrink:0;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #d0ad27;
+    color:#ffd92e;
+    font-size:19px;
+    font-weight:900;
+}
+
+.answer-text{
+    flex:1;
+    font-size:18px;
+    font-weight:700;
+}
+
+.answer.correct{
+    background:linear-gradient(100deg,#075a3b,#0b9560);
+    border-color:#26ef91;
+    animation:correctFlash .6s;
+}
+
+.answer.wrong{
+    background:linear-gradient(100deg,#641a2a,#9d263c);
+    border-color:#ff5365;
+    animation:shake .45s;
+}
+
+.answer.removed{
+    opacity:.12;
+    pointer-events:none;
+    transform:scale(.96);
+}
+
+@keyframes correctFlash{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.03)}
+    100%{transform:scale(1)}
+}
+
+@keyframes shake{
+    20%{transform:translateX(8px)}
+    40%{transform:translateX(-8px)}
+    60%{transform:translateX(5px)}
+    80%{transform:translateX(-5px)}
+}
+
+.game-actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:16px 0;
+}
+
+.secondary-btn{
+    padding:12px 25px;
+    border-radius:30px;
+    background:#0a2455;
+    border:1px solid #496696;
+    color:#dbe5ff;
+    font-size:14px;
+}
+
+.quit-btn{
+    color:#ff7080;
+}
+
+/* ================= PRIZES ================= */
+
+.prizes{
+    margin-top:18px;
+    border:1px solid #2b4779;
+    border-radius:22px;
+    padding:13px;
+    background:#04132e;
+}
+
+.prizes h3{
+    text-align:center;
+    color:#ffd83c;
+    margin-bottom:10px;
+}
+
+.prize-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+}
+
+.prize{
+    padding:8px 5px;
+    text-align:center;
+    border-radius:10px;
+    color:#9caecc;
+    background:#081c3f;
+    font-size:11px;
+}
+
+.prize.current{
+    color:#111;
+    background:linear-gradient(90deg,#ffe34a,#ffac00);
+    font-weight:900;
+    transform:scale(1.04);
+    box-shadow:0 0 15px #ffd32355;
+}
+
+.prize.done{
+    color:#49ed9a;
+    border:1px solid #247957;
+}
+
+/* ================= RESULT ================= */
+
+.result-card{
+    text-align:center;
+    padding:30px 18px;
+    border-radius:28px;
+    border:1px solid #d3ae29;
+    background:linear-gradient(145deg,#0b2d6d,#061632);
+}
+
+.result-icon{
+    font-size:65px;
+}
+
+.result-card h2{
+    color:#ffe044;
+    margin:12px 0;
+}
+
+.final-score{
+    font-size:38px;
+    font-weight:900;
+    color:#fff;
+    margin:15px 0;
+}
+
+.result-message{
+    color:#b8c5df;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    background:#000b;
+    backdrop-filter:blur(7px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:450px;
+    border-radius:26px;
+    padding:22px;
+    background:linear-gradient(145deg,#0b2d6d,#04132d);
+    border:1px solid #d2ae29;
+    box-shadow:0 0 50px #000;
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+    from{opacity:0;transform:scale(.9)}
+    to{opacity:1;transform:scale(1)}
+}
+
+.modal-box h2{
+    color:#ffdf3e;
+    text-align:center;
+    margin-bottom:7px;
+}
+
+.modal-sub{
+    text-align:center;
+    color:#aebbd5;
+    font-size:12px;
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+.form-label{
+    display:block;
+    color:#cbd6ec;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    outline:none;
+    border:1px solid #405b8a;
+    background:#03122c;
+    color:#fff;
+    font-size:17px;
+    margin-bottom:13px;
+    direction:ltr;
+    text-align:left;
+}
+
+.form-input:focus{
+    border-color:#ffd936;
+    box-shadow:0 0 12px #ffd93622;
+}
+
+.modal-actions{
+    display:flex;
+    gap:9px;
+}
+
+.modal-actions button{
+    flex:1;
+}
+
+.modal-error{
+    color:#ff6574;
+    min-height:20px;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.success-box{
+    text-align:center;
+}
+
+.success-box .big{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.countdown{
+    color:#ffe03c;
+    font-size:22px;
+    font-weight:900;
+    margin:15px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%) translateY(100px);
+    z-index:200;
+    min-width:250px;
+    max-width:90%;
+    text-align:center;
+    padding:13px 17px;
+    border-radius:15px;
+    background:#071b3d;
+    border:1px solid #d3b02c;
+    color:#fff;
+    box-shadow:0 10px 35px #0008;
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+.toast.success{
+    border-color:#28e890;
+}
+
+.toast.error{
+    border-color:#ff5667;
+}
+
+/* ================= TELEGRAM USER ================= */
+.telegram-user{
+    margin-top:7px;
+    color:#9fb0cf;
+    font-size:11px;
+    max-width:170px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.telegram-user b{
+    color:#ffe044;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .app{
+        padding:9px;
+    }
+
+    .logo-text{
+        font-size:15px;
+    }
+
+    .score-box{
+        min-width:108px;
+    }
+
+    .transfer-info h3{
+        font-size:17px;
+    }
+
+    .question{
+        font-size:20px;
+    }
+
+    .question-card{
+        min-height:130px;
+    }
+
+    .answer{
+        min-height:61px;
+    }
+
+    .answer-text{
+        font-size:16px;
+    }
+
+    .life{
+        width:72px;
+        height:58px;
+    }
+
+    .prize-list{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            <div class="logo-icon">🏆</div>
+
+            <div class="logo-text">
+                من سيربح المليون
+                <small>Millionaire Quiz</small>
+            </div>
+        </div>
+
+        <div class="score-box">
+            <span>رصيدك الحالي</span>
+            <strong id="headerScore">0 نقطة</strong>
+            <div class="telegram-user" id="telegramUser">جاري التعرف على الحساب...</div>
+        </div>
+
+    </header>
+
+
+    <!-- START SCREEN -->
+    <section id="startScreen" class="screen active">
+
+        <div class="start-card">
+
+            <div class="crown">👑</div>
+
+            <h1>من سيربح المليون</h1>
+
+            <p>
+                جاوب صح واصعد في مستويات الجائزة
+                <br>
+                كل إجابة صحيحة ترفع رصيدك
+            </p>
+
+            <div class="info-row">
+                <div class="info-pill">⏱️ 60 ثانية</div>
+                <div class="info-pill">🏆 حتى 1,000,000</div>
+                <div class="info-pill">❤️ بدون أسماء</div>
+            </div>
+
+            <button class="main-btn" onclick="startGame()">
+                🚀 ابدأ التحدي
+            </button>
+
+            <div class="best-score">
+                أفضل رصيد: <b id="bestScore">0</b> نقطة
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GAME SCREEN -->
+    <section id="gameScreen" class="screen">
+
+        <!-- تحويل الرصيد فوق اللعبة -->
+        <div class="transfer-card">
+
+            <div class="transfer-head">
+
+                <div class="transfer-icon">💸</div>
+
+                <div class="transfer-info">
+                    <h3>تحويل رصيدك</h3>
+                    <p>
+                        حوّل نقاطك إلى حسابك في بوت رشق دعمكم
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="transfer-balance">
+                <span>رصيدك القابل للتحويل</span>
+                <strong id="transferBalance">0 نقطة</strong>
+            </div>
+
+            <button class="transfer-btn" onclick="openTransfer()">
+                💸 تحويل الرصيد للبوت
+            </button>
+
+        </div>
+
+
+        <!-- GAME INFO -->
+
+        <div class="game-top">
+
+            <div class="level-box">
+                <span>المستوى</span>
+                <strong id="levelText">1 / 15</strong>
+            </div>
+
+            <div class="timer" id="timer">
+                60
+            </div>
+
+            <div class="progress-box">
+                <span>التقدم نحو المليون</span>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question-card">
+            <div class="question" id="questionText">
+                السؤال
+            </div>
+        </div>
+
+
+        <!-- LIFELINES -->
+
+        <div class="lifelines">
+
+            <button class="life" id="phoneLife" onclick="usePhone()">
+                📞
+                <small>اتصال</small>
+            </button>
+
+            <button class="life" id="audienceLife" onclick="useAudience()">
+                👥
+                <small>الجمهور</small>
+            </button>
+
+            <button class="life" id="fiftyLife" onclick="useFifty()">
+                50:50
+                <small>حذف إجابتين</small>
+            </button>
+
+        </div>
+
+
+        <!-- ANSWERS -->
+
+        <div class="answers" id="answers"></div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="game-actions">
+
+            <button class="secondary-btn quit-btn" onclick="quitGame()">
+                🛑 انسحاب
+            </button>
+
+            <button class="secondary-btn" onclick="toggleSound()">
+                🔊 الصوت
+            </button>
+
+        </div>
+
+
+        <!-- PRIZES -->
+
+        <div class="prizes">
+
+            <h3>🏆 سلم الجوائز</h3>
+
+            <div class="prize-list" id="prizeList"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section id="resultScreen" class="screen">
+
+        <div class="result-card">
+
+            <div class="result-icon" id="resultIcon">
+                🏆
+            </div>
+
+            <h2 id="resultTitle">
+                أحسنت!
+            </h2>
+
+            <div class="final-score" id="finalScore">
+                0
+            </div>
+
+            <div class="result-message" id="resultMessage">
+                رصيدك النهائي
+            </div>
+
+            <button class="transfer-btn" onclick="openTransfer()">
+                💸 تحويل الرصيد للبوت
+            </button>
+
+            <br><br>
+
+            <button class="secondary-btn" onclick="restartGame()">
+                🔄 لعب من جديد
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- TRANSFER MODAL -->
+
+<div class="modal" id="transferModal">
+
+    <div class="modal-box" id="transferContent">
+
+        <h2>💸 تحويل الرصيد</h2>
+
+        <div class="modal-sub">
+            أدخل بيانات حسابك في تلجرام لإتمام التحويل
+        </div>
+
+        <label class="form-label">
+            🆔 رقم حساب تلجرام
+        </label>
+
+        <input
+            id="telegramId"
+            class="form-input"
+            type="text"
+            inputmode="numeric"
+            placeholder="مثال: 123456789"
+        >
+
+        <label class="form-label">
+            💰 عدد النقاط
+        </label>
+
+        <input
+            id="transferAmount"
+            class="form-input"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            placeholder="عدد النقاط"
+        >
+
+        <div class="modal-error" id="transferError"></div>
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeTransfer()">
+                إلغاء
+            </button>
+
+            <button
+                class="transfer-btn"
+                onclick="confirmTransfer()">
+                تأكيد التحويل
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+const BOT_URL =
+"https://t.me/RSDMKBOT?start=_tgr_RWPn-P5iN2U0";
+
+// رابط استقبال تحويلات النقاط من البوت — ضعه بعد تجهيز endpoint البوت
+// عنوان API البوت — سنربطه بعد تعديل bot.py
+const TRANSFER_API_URL = "PUT_BOT_TRANSFER_URL_HERE/api/transfer";
+
+// بيانات Telegram Mini App (لا نرسل Bot Token للواجهة)
+const tg = window.Telegram && window.Telegram.WebApp
+    ? window.Telegram.WebApp
+    : null;
+
+const tgInitData = tg ? tg.initData : "";
+const tgUser = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
+
+const QUESTION_TIME = 60;
+
+const prizes = [
+    100,
+    200,
+    300,
+    500,
+    1000,
+    2000,
+    4000,
+    8000,
+    16000,
+    32000,
+    64000,
+    125000,
+    250000,
+    500000,
+    1000000
+];
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+const questions = [
+
+    {
+        q:"ما هي عاصمة الصين؟",
+        a:["بكين","شنغهاي","هونغ كونغ","نانجينغ"],
+        c:0
+    },
+
+    {
+        q:"ما هو أكبر محيط في العالم؟",
+        a:["المحيط الأطلسي","المحيط الهادئ","المحيط الهندي","المحيط المتجمد"],
+        c:1
+    },
+
+    {
+        q:"كم عدد كواكب المجموعة الشمسية؟",
+        a:["7","8","9","10"],
+        c:1
+    },
+
+    {
+        q:"ما هو الكوكب المعروف بالكوكب الأحمر؟",
+        a:["الزهرة","المريخ","المشتري","عطارد"],
+        c:1
+    },
+
+    {
+        q:"ما هي عاصمة مصر؟",
+        a:["الإسكندرية","الجيزة","القاهرة","الأقصر"],
+        c:2
+    },
+
+    {
+        q:"من هو مخترع المصباح الكهربائي الشهير؟",
+        a:["توماس إديسون","نيوتن","أينشتاين","جراهام بيل"],
+        c:0
+    },
+
+    {
+        q:"كم عدد أيام الأسبوع؟",
+        a:["5","6","7","8"],
+        c:2
+    },
+
+    {
+        q:"ما هو أسرع حيوان بري؟",
+        a:["الأسد","الفهد","النمر","الحصان"],
+        c:1
+    },
+
+    {
+        q:"ما هي أكبر قارة في العالم؟",
+        a:["أفريقيا","أوروبا","آسيا","أمريكا"],
+        c:2
+    },
+
+    {
+        q:"ما هو أكبر كوكب في المجموعة الشمسية؟",
+        a:["الأرض","زحل","المشتري","نبتون"],
+        c:2
+    },
+
+    {
+        q:"ما هي عاصمة اليابان؟",
+        a:["أوساكا","طوكيو","كيوتو","هيروشيما"],
+        c:1
+    },
+
+    {
+        q:"كم عدد ألوان قوس قزح؟",
+        a:["5","6","7","8"],
+        c:2
+    },
+
+    {
+        q:"ما هو الحيوان الذي يلقب بسفينة الصحراء؟",
+        a:["الحصان","الجمل","الفيل","الغزال"],
+        c:1
+    },
+
+    {
+        q:"ما هي اللغة الأكثر انتشاراً من حيث عدد المتحدثين الأصليين؟",
+        a:["العربية","الإنجليزية","الصينية","الإسبانية"],
+        c:2
+    },
+
+    {
+        q:"ما هو أقرب كوكب إلى الشمس؟",
+        a:["الأرض","عطارد","المريخ","الزهرة"],
+        c:1
+    },
+
+    {
+        q:"في أي قارة تقع مصر؟",
+        a:["آسيا","أفريقيا","أوروبا","أمريكا الجنوبية"],
+        c:1
+    },
+
+    {
+        q:"كم عدد أضلاع المثلث؟",
+        a:["2","3","4","5"],
+        c:1
+    },
+
+    {
+        q:"ما هو الغاز الذي يتنفسه الإنسان للبقاء على قيد الحياة؟",
+        a:["الأكسجين","الهيدروجين","النيتروجين فقط","ثاني أكسيد الكربون"],
+        c:0
+    },
+
+    {
+        q:"ما هي عاصمة فرنسا؟",
+        a:["مدريد","روما","باريس","لندن"],
+        c:2
+    },
+
+    {
+        q:"من كتب مسرحية روميو وجولييت؟",
+        a:["شكسبير","تولستوي","نجيب محفوظ","هوميروس"],
+        c:0
+    },
+
+    {
+        q:"ما هو أصغر عدد أولي؟",
+        a:["0","1","2","3"],
+        c:2
+    },
+
+    {
+        q:"ما هي أكبر دولة في العالم من حيث المساحة؟",
+        a:["الصين","روسيا","كندا","أمريكا"],
+        c:1
+    },
+
+    {
+        q:"ما هو الحيوان المعروف بأنه ملك الغابة؟",
+        a:["النمر","الفهد","الأسد","الذئب"],
+        c:2
+    },
+
+    {
+        q:"ما هي عاصمة السعودية؟",
+        a:["جدة","الرياض","مكة","الدمام"],
+        c:1
+    },
+
+    {
+        q:"كم عدد شهور السنة؟",
+        a:["10","11","12","13"],
+        c:2
+    },
+
+    {
+        q:"ما هو المعدن الذي رمزه الكيميائي Au؟",
+        a:["الفضة","الحديد","الذهب","النحاس"],
+        c:2
+    },
+
+    {
+        q:"ما هو أكبر عضو في جسم الإنسان؟",
+        a:["القلب","الجلد","الكبد","الرئة"],
+        c:1
+    },
+
+    {
+        q:"كم عدد حروف اللغة الإنجليزية؟",
+        a:["24","25","26","27"],
+        c:2
+    },
+
+    {
+        q:"ما هي عاصمة إيطاليا؟",
+        a:["ميلانو","روما","نابولي","تورينو"],
+        c:1
+    },
+
+    {
+        q:"ما هو البحر الذي يفصل بين أوروبا وأفريقيا؟",
+        a:["البحر الأحمر","البحر المتوسط","بحر العرب","بحر الشمال"],
+        c:1
+    },
+
+    {
+        q:"ما هي الرياضة التي تستخدم فيها الكرة الصفراء والمضرب؟",
+        a:["التنس","كرة القدم","السباحة","الملاكمة"],
+        c:0
+    },
+
+    {
+        q:"ما هو الجهاز المسؤول عن ضخ الدم في جسم الإنسان؟",
+        a:["الرئة","القلب","المعدة","الكبد"],
+        c:1
+    },
+
+    {
+        q:"ما هو الحيوان الذي يستطيع تغيير لونه؟",
+        a:["الأسد","الحرباء","الفيل","الحصان"],
+        c:1
+    },
+
+    {
+        q:"ما هي عاصمة الإمارات؟",
+        a:["دبي","أبوظبي","الشارقة","العين"],
+        c:1
+    },
+
+    {
+        q:"ما هو أقرب نجم إلى الأرض؟",
+        a:["القمر","الشمس","المريخ","نجم الشمال"],
+        c:1
+    },
+
+    {
+        q:"كم دقيقة توجد في الساعة؟",
+        a:["30","45","60","90"],
+        c:2
+    },
+
+    {
+        q:"ما هو لون الزمرد؟",
+        a:["أحمر","أزرق","أخضر","أصفر"],
+        c:2
+    },
+
+    {
+        q:"ما هي عاصمة بريطانيا؟",
+        a:["لندن","باريس","برلين","دبلن"],
+        c:0
+    },
+
+    {
+        q:"ما هو أكبر حيوان على وجه الأرض؟",
+        a:["الفيل","الحوت الأزرق","الزرافة","الحوت القاتل"],
+        c:1
+    },
+
+    {
+        q:"كم عدد القارات في العالم؟",
+        a:["5","6","7","8"],
+        c:2
+    },
+
+    {
+        q:"ما هي عاصمة ألمانيا؟",
+        a:["برلين","ميونخ","هامبورغ","فرانكفورت"],
+        c:0
+    }
+
+];
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
+
+let currentLevel = 0;
+let currentScore = 0;
+
+let currentQuestion = null;
+let currentAnswers = [];
+
+let timerValue = QUESTION_TIME;
+let timerInterval = null;
+
+let soundEnabled =
+    localStorage.getItem("million_sound") !== "off";
+
+let usedFifty = false;
+let usedAudience = false;
+let usedPhone = false;
+
+let isAnswering = false;
+
+let questionPool = [];
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const gameScreen =
+    document.getElementById("gameScreen");
+
+const resultScreen =
+    document.getElementById("resultScreen");
+
+const questionText =
+    document.getElementById("questionText");
+
+const answersBox =
+    document.getElementById("answers");
+
+const timerElement =
+    document.getElementById("timer");
+
+const headerScore =
+    document.getElementById("headerScore");
+
+const transferBalance =
+    document.getElementById("transferBalance");
+
+const levelText =
+    document.getElementById("levelText");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const prizeList =
+    document.getElementById("prizeList");
+
+
+/* =========================================================
+   TELEGRAM MINI APP
+========================================================= */
+
+function initTelegramApp(){
+
+    if(!tg){
+        setTelegramUserText("⚠️ افتح اللعبة من داخل Telegram");
+        return;
+    }
+
+    try{
+        tg.ready();
+        tg.expand();
+
+        if(tgUser){
+            const username = tgUser.username
+                ? "@" + tgUser.username
+                : (tgUser.first_name || "حساب Telegram");
+
+            setTelegramUserText("👤 " + username);
+        }else{
+            setTelegramUserText("👤 حساب Telegram");
+        }
+    }catch(e){
+        setTelegramUserText("👤 حساب Telegram");
+    }
+}
+
+function setTelegramUserText(text){
+    const el = document.getElementById("telegramUser");
+    if(el) el.textContent = text;
+}
+
+function getTelegramInitData(){
+    return tg ? tg.initData : "";
+}
+
+function telegramHaptic(type="light"){
+    try{
+        if(tg && tg.HapticFeedback){
+            tg.HapticFeedback.impactOccurred(type);
+        }
+    }catch(e){}
+}
+
+initTelegramApp();
+
+/* =========================================================
+   SCREEN
+========================================================= */
+
+function showScreen(screen){
+
+    document.querySelectorAll(".screen")
+        .forEach(s => s.classList.remove("active"));
+
+    screen.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================================
+   NUMBER FORMAT
+========================================================= */
+
+function formatNumber(number){
+
+    return Number(number || 0)
+        .toLocaleString("en-US");
+}
+
+
+/* =========================================================
+   UPDATE BALANCE
+========================================================= */
+
+function updateBalance(){
+
+    headerScore.textContent =
+        formatNumber(currentScore) + " نقطة";
+
+    transferBalance.textContent =
+        formatNumber(currentScore) + " نقطة";
+
+    document.getElementById("finalScore").textContent =
+        formatNumber(currentScore);
+
+    const best =
+        Number(localStorage.getItem("million_best") || 0);
+
+    if(currentScore > best){
+
+        localStorage.setItem(
+            "million_best",
+            currentScore
+        );
+
+        document.getElementById("bestScore")
+            .textContent =
+            formatNumber(currentScore);
+    }
+}
+
+
+/* =========================================================
+   BUILD PRIZES
+========================================================= */
+
+function buildPrizes(){
+
+    prizeList.innerHTML = "";
+
+    prizes.slice().reverse().forEach((amount,index)=>{
+
+        const originalIndex =
+            prizes.length - 1 - index;
+
+        const div =
+            document.createElement("div");
+
+        div.className = "prize";
+
+        div.dataset.level = originalIndex;
+
+        div.textContent =
+            formatNumber(amount);
+
+        prizeList.appendChild(div);
+    });
+
+    updatePrizes();
+}
+
+
+function updatePrizes(){
+
+    document.querySelectorAll(".prize")
+        .forEach(item=>{
+
+            const level =
+                Number(item.dataset.level);
+
+            item.classList.remove(
+                "current",
+                "done"
+            );
+
+            if(level < currentLevel){
+                item.classList.add("done");
+            }
+
+            if(level === currentLevel){
+                item.classList.add("current");
+            }
+        });
+
+    levelText.textContent =
+        Math.min(currentLevel + 1,15) + " / 15";
+
+    const percent =
+        (currentLevel / 15) * 100;
+
+    progressFill.style.width =
+        percent + "%";
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startGame(){
+
+    playSound("start");
+
+    currentLevel = 0;
+    currentScore = 0;
+
+    usedFifty = false;
+    usedAudience = false;
+    usedPhone = false;
+
+    isAnswering = false;
+
+    questionPool =
+        [...Array(questions.length).keys()];
+
+    shuffle(questionPool);
+
+    document.getElementById("fiftyLife")
+        .classList.remove("used");
+
+    document.getElementById("audienceLife")
+        .classList.remove("used");
+
+    document.getElementById("phoneLife")
+        .classList.remove("used");
+
+    buildPrizes();
+
+    updateBalance();
+
+    showScreen(gameScreen);
+
+    loadQuestion();
+}
+
+
+/* =========================================================
+   LOAD QUESTION
+========================================================= */
+
+function loadQuestion(){
+
+    clearInterval(timerInterval);
+
+    isAnswering = false;
+
+    if(questionPool.length === 0){
+
+        questionPool =
+            [...Array(questions.length).keys()];
+
+        shuffle(questionPool);
+    }
+
+    const index =
+        questionPool.pop();
+
+    currentQuestion =
+        questions[index];
+
+    currentAnswers =
+        currentQuestion.a.map(
+            (text,i)=>({
+                text:text,
+                originalIndex:i,
+                removed:false
+            })
+        );
+
+    questionText.textContent =
+        currentQuestion.q;
+
+    renderAnswers();
+
+    updatePrizes();
+
+    startTimer();
+
+    playSound("question");
+}
+
+
+/* =========================================================
+   RENDER ANSWERS
+========================================================= */
+
+function renderAnswers(){
+
+    answersBox.innerHTML = "";
+
+    const letters = ["أ","ب","ج","د"];
+
+    currentAnswers.forEach((answer,index)=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "answer";
+
+        button.dataset.index = index;
+
+        if(answer.removed){
+            button.classList.add("removed");
+        }
+
+        button.innerHTML = `
+            <span class="answer-letter">
+                ${letters[index]}
+            </span>
+
+            <span class="answer-text">
+                ${answer.text}
+            </span>
+        `;
+
+        button.onclick =
+            ()=>chooseAnswer(index);
+
+        answersBox.appendChild(button);
+    });
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function startTimer(){
+
+    clearInterval(timerInterval);
+
+    timerValue = QUESTION_TIME;
+
+    updateTimer();
+
+    timerInterval =
+        setInterval(()=>{
+
+            timerValue--;
+
+            updateTimer();
+
+            if(timerValue <= 10 &&
+               timerValue > 0){
+
+                playSound("tick");
+            }
+
+            if(timerValue <= 0){
+
+                clearInterval(timerInterval);
+
+                handleTimeout();
+            }
+
+        },1000);
+}
+
+
+function updateTimer(){
+
+    timerElement.textContent =
+        timerValue;
+
+    const progress =
+        (timerValue / QUESTION_TIME) * 100;
+
+    timerElement.style
+        .setProperty(
+            "--progress",
+            progress + "%"
+        );
+
+    if(timerValue <= 10){
+        timerElement.classList.add("warning");
+    }else{
+        timerElement.classList.remove("warning");
+    }
+}
+
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+function chooseAnswer(index){
+
+    if(isAnswering)
+        return;
+
+    if(currentAnswers[index].removed)
+        return;
+
+    isAnswering = true;
+
+    clearInterval(timerInterval);
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+    const selected =
+        buttons[index];
+
+    if(currentAnswers[index].originalIndex ===
+       currentQuestion.c){
+
+        selected.classList.add("correct");
+        telegramHaptic("medium");
+
+        playSound("correct");
+
+        setTimeout(()=>{
+
+            currentScore =
+                prizes[currentLevel];
+
+            currentLevel++;
+
+            updateBalance();
+
+            updatePrizes();
+
+            if(currentLevel >= prizes.length){
+
+                finishGame(true);
+
+            }else{
+
+                showToast(
+                    "🎉 إجابة صحيحة! رصيدك أصبح " +
+                    formatNumber(currentScore),
+                    "success"
+                );
+
+                setTimeout(()=>{
+                    loadQuestion();
+                },900);
+            }
+
+        },700);
+
+    }else{
+
+        selected.classList.add("wrong");
+        telegramHaptic("heavy");
+
+        playSound("wrong");
+
+        /*
+           الغلط لا ينهي اللعبة
+           ولا ينقص الرصيد
+        */
+
+        setTimeout(()=>{
+
+            showToast(
+                "❌ إجابة غير صحيحة — سؤال جديد!",
+                "error"
+            );
+
+            setTimeout(()=>{
+                loadQuestion();
+            },700);
+
+        },550);
+    }
+}
+
+
+/* =========================================================
+   TIMEOUT
+========================================================= */
+
+function handleTimeout(){
+
+    if(isAnswering)
+        return;
+
+    isAnswering = true;
+
+    playSound("wrong");
+
+    showToast(
+        "⏰ انتهى الوقت — سؤال جديد!",
+        "error"
+    );
+
+    setTimeout(()=>{
+        loadQuestion();
+    },1000);
+}
+
+
+/* =========================================================
+   50 / 50
+========================================================= */
+
+function useFifty(){
+
+    if(usedFifty)
+        return;
+
+    usedFifty = true;
+
+    document.getElementById("fiftyLife")
+        .classList.add("used");
+
+    const wrongIndexes =
+        currentAnswers
+        .map((a,i)=>({
+            a,
+            i
+        }))
+        .filter(x =>
+            x.a.originalIndex !==
+            currentQuestion.c
+        );
+
+    shuffle(wrongIndexes);
+
+    wrongIndexes
+        .slice(0,2)
+        .forEach(item=>{
+            currentAnswers[item.i].removed = true;
+        });
+
+    renderAnswers();
+
+    playSound("click");
+
+    showToast(
+        "🎯 تم حذف إجابتين",
+        "success"
+    );
+}
+
+
+/* =========================================================
+   AUDIENCE
+========================================================= */
+
+function useAudience(){
+
+    if(usedAudience)
+        return;
+
+    usedAudience = true;
+
+    document.getElementById("audienceLife")
+        .classList.add("used");
+
+    const correct =
+        currentQuestion.c;
+
+    let values = [10,10,10,10];
+
+    values[correct] =
+        Math.floor(
+            55 + Math.random()*25
+        );
+
+    let remaining =
+        100 - values[correct];
+
+    const others =
+        [0,1,2,3]
+        .filter(i=>i !== correct);
+
+    others.forEach((i,index)=>{
+
+        if(index === others.length-1){
+
+            values[i] = remaining;
+
+        }else{
+
+            const max =
+                Math.max(
+                    0,
+                    remaining -
+                    (others.length-index-1)
+                );
+
+            const value =
+                Math.floor(
+                    Math.random() *
+                    (max + 1)
+                );
+
+            values[i] = value;
+            remaining -= value;
+        }
+    });
+
+    let message =
+        "📊 تصويت الجمهور:\n\n";
+
+    const letters =
+        ["أ","ب","ج","د"];
+
+    values.forEach((v,i)=>{
+
+        message +=
+            letters[i] +
+            " : " +
+            v +
+            "%\n";
+    });
+
+    setTimeout(()=>{
+        alert(message);
+    },50);
+
+    playSound("click");
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+function usePhone(){
+
+    if(usedPhone)
+        return;
+
+    usedPhone = true;
+
+    document.getElementById("phoneLife")
+        .classList.add("used");
+
+    const answer =
+        currentQuestion.a[currentQuestion.c];
+
+    playSound("click");
+
+    setTimeout(()=>{
+
+        alert(
+            "📞 صديقك يقول:\n\n" +
+            "أعتقد أن الإجابة هي:\n\n" +
+            "👉 " + answer
+        );
+
+    },100);
+}
+
+
+/* =========================================================
+   QUIT
+========================================================= */
+
+function quitGame(){
+
+    clearInterval(timerInterval);
+
+    const ok =
+        confirm(
+            "هل تريد الانسحاب والاحتفاظ برصيدك الحالي؟\n\n" +
+            "رصيدك: " +
+            formatNumber(currentScore)
+        );
+
+    if(!ok){
+
+        startTimer();
+
+        return;
+    }
+
+    finishGame(false);
+}
+
+
+/* =========================================================
+   FINISH
+========================================================= */
+
+function finishGame(won){
+
+    clearInterval(timerInterval);
+
+    document.getElementById("resultIcon")
+        .textContent =
+        won ? "🏆" : "💰";
+
+    document.getElementById("resultTitle")
+        .textContent =
+        won
+        ? "مبروك! وصلت للمليون 🎉"
+        : "تم إنهاء التحدي";
+
+    document.getElementById("resultMessage")
+        .textContent =
+        won
+        ? "أكملت جميع مستويات اللعبة بنجاح!"
+        : "يمكنك تحويل رصيدك الحالي إلى البوت.";
+
+    updateBalance();
+
+    showScreen(resultScreen);
+
+    if(won){
+        playSound("win");
+    }
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartGame(){
+
+    playSound("click");
+
+    startGame();
+}
+
+
+/* =========================================================
+   TRANSFER
+========================================================= */
+
+function openTransfer(){
+
+    document.getElementById("transferModal")
+        .classList.add("show");
+
+    document.getElementById("telegramId")
+        .value = "";
+
+    document.getElementById("transferAmount")
+        .value = "";
+
+    document.getElementById("transferError")
+        .textContent = "";
+
+    updateBalance();
+}
+
+
+function closeTransfer(){
+
+    document.getElementById("transferModal")
+        .classList.remove("show");
+}
+
+
+/* =========================================================
+   CONFIRM TRANSFER
+========================================================= */
+
+function confirmTransfer(){
+
+    const telegramId =
+        document.getElementById("telegramId")
+            .value.trim();
+
+    const amount =
+        Number(
+            document.getElementById("transferAmount")
+                .value
+        );
+
+    const error =
+        document.getElementById("transferError");
+
+    error.textContent = "";
+
+    if(!/^\d{5,15}$/.test(telegramId)){
+        error.textContent = "❌ اكتب رقم حساب تلجرام صحيح.";
+        return;
+    }
+
+    if(!Number.isInteger(amount) || amount <= 0){
+        error.textContent = "❌ أدخل عدد نقاط صحيح.";
+        return;
+    }
+
+    if(amount > currentScore){
+        error.textContent = "❌ رصيدك غير كافي للتحويل.";
+        return;
+    }
+
+    if(!getTelegramInitData()){
+        error.textContent = "❌ افتح اللعبة من داخل Telegram أولاً.";
+        return;
+    }
+
+    if(!TRANSFER_API_URL || TRANSFER_API_URL.includes("PUT_BOT_TRANSFER_URL_HERE")){
+        error.textContent = "⚠️ ربط البوت لم يتم تفعيله بعد.";
+        return;
+    }
+
+    const btn = document.querySelector('#transferContent .transfer-btn');
+    if(btn){ btn.disabled = true; btn.textContent = "⏳ جاري التحويل..."; }
+
+    fetch(TRANSFER_API_URL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            initData: getTelegramInitData(),
+            target_id: telegramId,
+            amount: amount
+        })
+    })
+    .then(async response => {
+        let data = {};
+        try { data = await response.json(); } catch(e) {}
+        if(!response.ok || data.ok !== true){
+            throw new Error(data.message || "فشل التحويل");
+        }
+        return data;
+    })
+    .then(() => {
+        telegramHaptic("medium");
+        currentScore -= amount;
+        updateBalance();
+        playSound("success");
+        showTransferSuccess(telegramId, amount);
+    })
+    .catch(err => {
+        error.textContent = "❌ " + (err.message || "تعذر تنفيذ التحويل.");
+        if(btn){ btn.disabled = false; btn.textContent = "تأكيد التحويل"; }
+    });
+}
+
+
+/* =========================================================
+   TRANSFER SUCCESS
+========================================================= */
+
+function showTransferSuccess(
+    telegramId,
+    amount
+){
+
+    const box =
+        document.getElementById("transferContent");
+
+    let seconds = 4;
+
+    box.innerHTML = `
+
+        <div class="success-box">
+
+            <div class="big">
+                ✅
+            </div>
+
+            <h2>
+                تم تجهيز التحويل
+            </h2>
+
+            <div class="modal-sub">
+
+                رقم الحساب:
+                <b>${telegramId}</b>
+
+                <br>
+
+                المبلغ:
+                <b>${formatNumber(amount)} نقطة</b>
+
+                <br><br>
+
+                جاري فتح بوت رشق دعمكم لإكمال العملية...
+
+            </div>
+
+            <div class="countdown"
+                 id="redirectCountdown">
+                ${seconds}
+            </div>
+
+            <button
+                class="transfer-btn"
+                onclick="goToBot()">
+                🤖 فتح البوت الآن
+            </button>
+
+        </div>
+
+    `;
+
+
+    const interval =
+        setInterval(()=>{
+
+            seconds--;
+
+            const el =
+                document.getElementById(
+                    "redirectCountdown"
+                );
+
+            if(el){
+                el.textContent = seconds;
+            }
+
+            if(seconds <= 0){
+
+                clearInterval(interval);
+
+                goToBot();
+            }
+
+        },1000);
+}
+
+
+/* =========================================================
+   OPEN BOT
+========================================================= */
+
+function goToBot(){
+
+    /*
+       رابط البوت الذي أرسلته
+    */
+
+    window.location.href = BOT_URL;
+}
+
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+let audioContext = null;
+
+function getAudio(){
+
+    if(!audioContext){
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+    }
+
+    return audioContext;
+}
+
+
+function tone(
+    frequency,
+    duration,
+    type="sine",
+    volume=.12,
+    delay=0
+){
+
+    if(!soundEnabled)
+        return;
+
+    const ctx =
+        getAudio();
+
+    const start =
+        ctx.currentTime + delay;
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    oscillator.type = type;
+
+    oscillator.frequency.setValueAtTime(
+        frequency,
+        start
+    );
+
+    gain.gain.setValueAtTime(
+        0,
+        start
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        volume,
+        start + .02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        start + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+
+    oscillator.start(start);
+
+    oscillator.stop(
+        start + duration + .03
+    );
+}
+
+
+function playSound(type){
+
+    if(!soundEnabled)
+        return;
+
+    try{
+
+        if(type === "click"){
+
+            tone(600,.08,"square",.07);
+
+        }
+
+        else if(type === "start"){
+
+            tone(440,.12,"sine",.12,0);
+            tone(660,.12,"sine",.12,.12);
+            tone(880,.18,"sine",.13,.24);
+
+        }
+
+        else if(type === "question"){
+
+            tone(440,.08,"sine",.08);
+            tone(554,.08,"sine",.08,.1);
+
+        }
+
+        else if(type === "correct"){
+
+            tone(523,.12,"sine",.15,0);
+            tone(659,.12,"sine",.15,.12);
+            tone(784,.18,"sine",.16,.24);
+            tone(1046,.25,"sine",.17,.42);
+
+        }
+
+        else if(type === "wrong"){
+
+            tone(220,.18,"sawtooth",.10);
+            tone(160,.25,"sawtooth",.08,.18);
+
+        }
+
+        else if(type === "tick"){
+
+            tone(900,.045,"square",.06);
+
+        }
+
+        else if(type === "success"){
+
+            tone(600,.1,"sine",.13);
+            tone(800,.1,"sine",.13,.1);
+            tone(1100,.2,"sine",.15,.2);
+
+        }
+
+        else if(type === "win"){
+
+            tone(523,.15,"sine",.15,0);
+            tone(659,.15,"sine",.15,.15);
+            tone(784,.15,"sine",.15,.3);
+            tone(1046,.2,"sine",.17,.45);
+            tone(1318,.35,"sine",.18,.7);
+
+        }
+
+    }catch(e){
+
+        console.log("Audio error:",e);
+
+    }
+}
+
+
+function toggleSound(){
+
+    soundEnabled =
+        !soundEnabled;
+
+    localStorage.setItem(
+        "million_sound",
+        soundEnabled ? "on" : "off"
+    );
+
+    showToast(
+        soundEnabled
+        ? "🔊 تم تشغيل الصوت"
+        : "🔇 تم إيقاف الصوت",
+        "success"
+    );
+
+    if(soundEnabled){
+        playSound("click");
+    }
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+function showToast(message,type="success"){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast show " + type;
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(()=>{
+
+            toast.classList.remove("show");
+
+        },2200);
+}
+
+
+/* =========================================================
+   SHUFFLE
+========================================================= */
+
+function shuffle(array){
+
+    for(
+        let i=array.length-1;
+        i>0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random()*(i+1)
+            );
+
+        [
+            array[i],
+            array[j]
+        ] =
+        [
+            array[j],
+            array[i]
+        ];
+    }
+
+    return array;
+}
+
+
+/* =========================================================
+   BEST SCORE
+========================================================= */
+
+document.getElementById("bestScore")
+    .textContent =
+    formatNumber(
+        localStorage.getItem("million_best") || 0
+    );
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+buildPrizes();
+updateBalance();
+
+
+/* إغلاق المودال عند الضغط خارج الصندوق */
+
+document.getElementById("transferModal")
+    .addEventListener(
+        "click",
+        function(e){
+
+            if(e.target === this){
+                closeTransfer();
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
